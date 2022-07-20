@@ -11,16 +11,15 @@ Changes game objects padding on broadcast section (so that the user can see as m
 
 ## Screenshots
 
-*Before*
+*Before - only 4 games visible at once*
 
-![scr1]()
+![scr1](https://i.imgur.com/HwCVd7J.png)
 
 *After*
 
-![scr2]()
+![scr2](https://i.imgur.com/98Ic7Uv.png)
 
 ## Upcoming features, bugfixes
 
-* Add screenshots to this README (atm no big tournaments live, so can't really display the full potential)
 * Bug: After padding fix, when user switches to broadcast tab and then back to games again, padding doesn't fix again
 * (Maybe) Add script versions to GitHub releases
