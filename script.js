@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Prettier Lichess - Broadcast fix
-// @version      1.3
+// @version      1.4
 // @description  Changes games padding on broadcast section, and removes streamers section.
 // @author       Ivan Pavlov
 // @match        https://lichess.org/broadcast/*
@@ -61,7 +61,7 @@
      }
 
     // CONVERTING GAMES AMOUNT TO PADDING VALUE IN PIXELS
-    //  1  games ~ 100 pixels
+    //  1  game  ~ 100 pixels
     //  2  games ~ 50  pixels
     //  3  games ~ 22  pixels
     //  4  games ~ 14  pixels
@@ -70,4 +70,11 @@
     //  7  games ~ 3   pixels
     //  8  games ~ 1   pixels
     //  9+ games ~ 0   pixels
+
+    // Make sure padding will fix every time user switch tabs.
+    let elements = document.querySelectorAll("[class^=relay-tour]");
+    elements[4].addEventListener("click", restartPaddingFix);
+    function restartPaddingFix() {
+        intervalID = window.setInterval(changePadding, 500);
+    }
 })();
