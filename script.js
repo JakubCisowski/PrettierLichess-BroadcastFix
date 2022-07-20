@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Prettier Lichess - Broadcast fix
-// @version      1.2
+// @version      1.3
 // @description  Changes games padding on broadcast section, and removes streamers section.
 // @author       Ivan Pavlov
 // @match        https://lichess.org/broadcast/*
@@ -27,17 +27,13 @@
                 child.style.cssText = 'padding:' + padding + 'px 1px !important';
             }
 
-            // // Delete streamers section.
-            // if(streamerSection != undefined) {
-            //    streamersSection[0].remove();
-            // }
+            // Delete streamers section.
+            if(streamersSection != undefined) {
+               streamersSection[0].remove();
+            }
 
             // Stop refreshing when section is found.
             window.clearInterval(intervalID); // bug: for some reason this doesn't clear the interval
-        }
-
-        if(streamersSection != undefined) {
-            streamersSection.remove();
         }
     }
 
