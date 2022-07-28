@@ -21,4 +21,5 @@ Changes game objects padding on broadcast section (so that the user can see as m
 
 ## Upcoming features, bugfixes
 
+* Bug: If games appear after switching to 'games' tab (not instantly), padding doesn't apply
 * (Maybe) Add script versions to GitHub releases
