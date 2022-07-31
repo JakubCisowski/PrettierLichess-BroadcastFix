@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Prettier Lichess - Broadcast fix
-// @version      1.4
+// @version      1.5
 // @description  Changes games padding on broadcast section, and removes streamers section.
 // @author       Ivan Pavlov
 // @match        https://lichess.org/broadcast/*
@@ -10,7 +10,11 @@
 (function() {
     'use strict';
 
-    let intervalID = window.setInterval(changePadding, 500);
+    const initialIntervalMs = 500; // Initial frequency of checking for broadcast section.
+    const backupIntervalMs = 10000; // After initial styling backup interval is deployed to style every few seconds to prevent bugs with styling.
+
+    let initialIntervalId = window.setInterval(changePadding, initialIntervalMs);
+    let backupIntervalDeployed = false;
 
     function changePadding() {
         let gamesSection = document.querySelectorAll("[class^=study__chapters]");
@@ -33,7 +37,12 @@
             }
 
             // Stop refreshing when section is found.
-            window.clearInterval(intervalID); // bug: for some reason this doesn't clear the interval
+            window.clearInterval(initialIntervalId); // bug: for some reason this doesn't clear the interval
+            // Do this only once - after initial styling style every X ms. This prevents multiple bugs which disable styling.
+            if(backupIntervalDeployed == false){
+                window.setInterval(changePadding, backupIntervalMs);
+            }
+            backupIntervalDeployed = true; // Set to true to deploy backup only once.
         }
     }
 
@@ -75,6 +84,6 @@
     let elements = document.querySelectorAll("[class^=relay-tour]");
     elements[4].addEventListener("click", restartPaddingFix);
     function restartPaddingFix() {
-        intervalID = window.setInterval(changePadding, 500);
+        initialIntervalId = window.setInterval(changePadding, initialIntervalMs);
     }
 })();
